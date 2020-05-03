@@ -41,6 +41,7 @@ class Timezone
         time_t toLocal(time_t utc);
         time_t toLocal(time_t utc, TimeChangeRule **tcr);
         time_t toUTC(time_t local);
+        time_t toUTC(time_t local, bool dst);
         bool utcIsDST(time_t utc);
         bool locIsDST(time_t local);
         void setRules(TimeChangeRule dstStart, TimeChangeRule stdStart);
