@@ -114,6 +114,19 @@ time_t Timezone::toUTC(time_t local)
         return local - m_std.offset * SECS_PER_MIN;
 }
 
+time_t Timezone::toUTC(time_t local, bool dst)
+{
+    // recalculate the time change points if needed
+    if (year(local) != year(m_dstLoc)) calcTimeChanges(year(local));
+
+    if (dst)
+        return local - m_dst.offset * SECS_PER_MIN;
+    else
+        return local - m_std.offset * SECS_PER_MIN;
+}
+
+
+
 /*----------------------------------------------------------------------*
  * Determine whether the given UTC time_t is within the DST interval    *
  * or the Standard time interval.                                       *
